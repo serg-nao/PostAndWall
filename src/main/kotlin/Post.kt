@@ -13,6 +13,7 @@ data class Post(
     var comments: Comments?,
     var postType: String,
     var postSource: PostSource?,
+    var attachment: Array<Attachment>?,
     var geo: Geo?,
     var signerId: Int?,
     var copyHistory: ArrayList<Post>?,
@@ -28,4 +29,22 @@ data class Post(
     var isFavourite: Boolean,
     var donut: Donut?,
     var postponedId: Int?
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Post
+
+        if (attachment != null) {
+            if (other.attachment == null) return false
+            if (!attachment.contentEquals(other.attachment)) return false
+        } else if (other.attachment != null) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return attachment?.contentHashCode() ?: 0
+    }
+}
