@@ -34,4 +34,10 @@ fun main() {
     wall.update(post)
     wall.update(nextPost)
     wall.update(lastPost)
+
+    val myFirstComment = Comment(
+        ownerId = 1, postId = 1L, fromGroup = null, message = "Это мой первый комментарий", replyToComment = 0,
+        attachments = null, stickerId = null, guid = 100L
+    )
+    wall.createComment(myFirstComment)
 }
