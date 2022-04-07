@@ -2,20 +2,20 @@ package ru.netology
 
 class WallService {
     private var posts = emptyArray<Post>()
+    private var comments = emptyArray<Comment>()
 
     fun add(post: Post): Post {
-        post.id = (posts.size+1).toLong()        //generateId(post, posts.size)
+        post.id = (posts.size+1).toLong()
         posts += post
         return posts.last()
     }
 
-    //private fun generateId(post: Post, index: Int): Long {
-    //    val firstPartId = post.ownerId.toString()
-    //    val secondPartId = post.date.toString()
-    //    val thirdPartId = index.toString()
-    //    val s = firstPartId + secondPartId + thirdPartId
-    //    return s.toLong()
-    //}
+    fun createComment(comment: Comment): Comment {
+        findById(comment.postId)
+        comments += comment
+        println("Комментарий успешно добавлен")
+        return comments.last()
+    }
 
     fun update(post: Post): Boolean {
         val i = lookForId(post.id)
@@ -53,5 +53,12 @@ class WallService {
                 }
             }
             return index
+        }
+
+        private fun findById(id: Long): Post {
+            for (post in posts) {
+                if (post.id == id) return post
+            }
+            throw PostNotFoundException("Post is not found")
         }
 }
