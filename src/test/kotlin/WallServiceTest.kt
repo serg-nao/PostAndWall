@@ -25,10 +25,9 @@ internal class WallServiceTest {
             donut = Donut(true, 30U, placeholder = Placeholder(), true,
             "noEdit"), postponedId = 1))
         val finalId = postAdded.id
-        val result: Boolean = (finalId != 0L)
 
         //assert
-        assertTrue(result)
+        assertNotEquals(0L, finalId)
     }
 
     @Test
